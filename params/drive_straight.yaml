@@ -1,0 +1,18 @@
+/drive_straight:
+  ros__parameters:
+    use_sim_time: false
+
+    cmd_vel_topic: cmd_vel
+    # If limo_base is ackermann driver, enable publishing /limo/ack_cmd too.
+    publish_ackermann: false
+    ack_cmd_topic: /limo/ack_cmd
+    linear_x: 0.2
+    angular_z: 0.0
+    publish_hz: 10.0
+
+    # For quick lane-less test, keep enable_estop false.
+    # If you want to gate by e-stop, set true and ensure e_stop is published.
+    enable_estop: false
+    estop_topic: e_stop
+    stop_on_estop: true
+

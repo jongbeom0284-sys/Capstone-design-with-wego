@@ -1,0 +1,47 @@
+/lab_adaptive_lane:
+  ros__parameters:
+    use_sim_time: false
+
+    # Input/Output topics
+    image_topic: /camera/color/image_raw
+    distance_topic: distance_y
+    debug_topic: debug_image
+    debug_publish_period_s: 0.1
+
+    # ROI (tune for your camera mounting)
+    roi_x_l: 0
+    roi_x_h: 640
+    # 마스크(흑/백) 확인이 목적이면 일단 넓게(풀프레임에 가깝게) 보는 게 편합니다.
+    roi_y_l: 0
+    roi_y_h: 480
+
+    # Publish debug in full-frame size (ROI pasted back)
+    debug_full_frame: true
+
+    # Reference x(pixel) in ROI coordinates
+    reference_distance: 170
+
+    # Debug image selector
+    # 0: ROI, 1: LAB B-channel, 2: adaptive mask, 3: morph filtered, 4: contour overlay
+    debug_image_num: 4
+
+    # LAB B-channel pre-blur (must be odd)
+    blur_ksize: 5
+
+    # Adaptive threshold (block size must be odd)
+    adapt_block_size: 31
+    adapt_c: -5
+
+    # Morphology: opening removes small glare, closing fills small holes
+    open_ksize: 3
+    open_iters: 1
+    close_ksize: 7
+    close_iters: 2
+
+    # Contour (blob) filtering
+    min_area: 120
+    # aspect_mode:
+    # - "wh": use width/height (가로/세로) only
+    # - "max": use max(width/height, height/width) => "long shape" in any direction
+    aspect_mode: wh
+    min_aspect_ratio: 3.0
